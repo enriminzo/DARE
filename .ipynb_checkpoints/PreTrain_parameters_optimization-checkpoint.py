@@ -13,10 +13,10 @@ from ray.tune.schedulers import  HyperBandForBOHB, ASHAScheduler
 from ray.tune.search.bohb import  TuneBOHB
 from ray.air import session, RunConfig
 
-from Model.Datasets import Dataset_PT
-from Model.trainer import pretrainer
-from Model.utils import ModelConfigs
-from Model.bert import BERT
+from Dare.Datasets import Dataset_PT
+from Dare.trainer import pretrainer
+from Dare.utils import ModelConfigs
+from Dare.bert import BERT
 
 
 # Define hyperparameters space and initial points (optional)

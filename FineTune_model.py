@@ -13,12 +13,12 @@ from sklearn.metrics import roc_auc_score
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.model_selection import KFold
 
-from Model.Datasets import Dataset_FT
-from Model.utils import ModelConfigs
-from Model.bert_pretraining import BERT_PT
-from Model.bert import BERT
-from Model.utils_FT import WeigthedBCELoss, rnn_liner_FT, import_model, EarlyStopping
-from Model.trainer import finetuner
+from Dare.Datasets import Dataset_FT
+from Dare.utils import ModelConfigs
+from Dare.bert_pretraining import BERT_PT
+from Dare.bert import BERT
+from Dare.utils_FT import WeigthedBCELoss, rnn_liner_FT, import_model, EarlyStopping
+from Dare.trainer import finetuner
 
 
 # To get weights for class balances

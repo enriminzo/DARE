@@ -13,12 +13,12 @@ from sklearn.metrics import roc_auc_score
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.model_selection import KFold
 
-from Model.Datasets import Dataset_FT
-from Model.utils import ModelConfigs
-from Model.bert_pretraining import BERT_PT
-from Model.bert import BERT
-from Model.utils_FT import WeigthedBCELoss, rnn_liner_FT, import_model, EarlyStopping
-from Model.trainer import finetuner
+from Dare.Datasets import Dataset_FT
+from Dare.utils import ModelConfigs
+from Dare.bert_pretraining import BERT_PT
+from Dare.bert import BERT
+from Dare.utils_FT import WeigthedBCELoss, rnn_liner_FT, import_model, EarlyStopping
+from Dare.trainer import finetuner
 
 
 # To get weights for class balances
@@ -160,9 +160,9 @@ if __name__=='__main__':
     parser.add_argument('--weighted_loss', action='store_true')
     parser.add_argument('--no-weighted_loss', dest='weighted_loss', action='store_false')
     parser.set_defaults(weighted_loss=True)
-    parser.add_argument('--config_file', type=str, default='/home/enrico/transformer_final/Configs/configs_std.yaml')
-    parser.add_argument('--paths_file', type=str, default='/home/enrico/transformer_final/Configs/data_paths.yaml')
-    parser.add_argument('--path_results', type=str, default='/home/enrico/transformer_final/Results/FT/')
+    parser.add_argument('--config_file', type=str, default='Dare/Configs/configs_std.yaml')
+    parser.add_argument('--paths_file', type=str, default='Dare/Configs/data_paths.yaml')
+    parser.add_argument('--path_results', type=str, default='Results/FT/')
     parser.add_argument('--model_epoch', type=int, default=9)
     parser.add_argument('--hidden_size', type=int, default=360)
     parser.add_argument('--n_layers', type=int, default=3)

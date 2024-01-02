@@ -44,12 +44,7 @@ __pycache__/
 *.md
 *.html
 *.pdf
-*.pkl
-*.pkl.gz
-*.pickle
-*.pickle.gz
-*.json
-*.yml
+*with_labs.pkl
 *.ini
 *.cfg
 *.conf
