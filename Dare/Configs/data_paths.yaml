@@ -1,0 +1,7 @@
+d0_m0_path: /home/enrico/DARE/Data/d0_m0.pkl
+events_path: /home/enrico/DARE/Data/events_list_std.pkl
+P0_gen_path: /home/enrico/DARE/Data/P0_general_std.csv
+cods_labs_path: /home/enrico/DARE/Data/cods_labs.json
+cods_lists_path: /home/enrico/DARE/Data/cods_lists.json
+config_path: /home/enrico/DARE/Configs/configs_std.yaml
+idps_tests: /home/enrico/DARE/Data/idps_for_tests.pkl

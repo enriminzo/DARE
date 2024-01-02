@@ -1,0 +1,30 @@
+# EMBEDDING 
+P0_size: 3
+nd: 181
+nm: 13
+nv: 20
+nmax: 40
+dropout_emb: 0.1
+time_emb: learn
+max_time_embedding: 367
+padd_indx_time: 366
+type_size: 7
+padd_indx_type: 6
+    
+# MODEL:
+hidden_size: 360
+relative: True
+attn_heads: 18
+learn: True
+n_layers: 3
+dropout_attention: 0.1
+dropout_trans: 0.1
+feed_forward_hidden: 1440
+
+#MASKS  
+masks: 
+    diags: 0.5
+    drugs: 0.5
+    age: -5
+    tfd: -1
+    vars: 0

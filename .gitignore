@@ -50,7 +50,6 @@ __pycache__/
 *.pickle.gz
 *.json
 *.yml
-*.yaml
 *.ini
 *.cfg
 *.conf
