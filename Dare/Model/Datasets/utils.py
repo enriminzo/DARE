@@ -4,7 +4,7 @@ import json
 import warnings
 import torch
 
-DATA_DIR = '/home/enrico/transformer_final/Data/'
+DATA_DIR = '/home/enrico/DARE/Data/'
 with open(DATA_DIR+'cods_lists.json', 'r') as f:
     cods_list = json.load(f)
 

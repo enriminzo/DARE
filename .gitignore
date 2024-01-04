@@ -59,4 +59,4 @@ __pycache__/
 /venv/
 .env/
 *.pytest_cache/
-.ipynb_checkpoints
+.ipynb_checkpoints/

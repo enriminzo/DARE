@@ -62,16 +62,19 @@ class EarlyStopping():
 
 # -----------------------------------------------------------------------------------------------------------------
 
-def import_model(config, epoch, model_path=None, device=None, n_diags=None, n_drugs=None, n_vars=None):
+def import_model(config, epoch, model_path=None, model_name=None, device=None, n_diags=None, n_drugs=None, n_vars=None):
     '''
         Load model from pretrained one, return only the model without the pretraing layers
     '''
-    if model_path is None:
+    if model_name is None:
         if config.Model.relative:
             model_name = f'BERT_PT_R_attnheads{config.Model.attn_heads}_hiddens{config.Model.hidden}_layers{config.Model.n_layers}'
         else:
             model_name = f'BERT_PT_attnheads{config.Model.attn_heads}_hiddens{config.Model.hidden}_layers{config.Model.n_layers}'
-        model_path = os.path.join('/home/enrico/transformer_final/Results/Models_pretrained/', model_name+".ep%d" % epoch)
+    if model_path is None:
+        model_path = '/home/enrico/transformer_final/Results/Models_pretrained/'
+    
+    model_path = os.path.join(model_path, model_name+".ep%d" % epoch)
     if not os.path.exists(model_path):
         raise FileNotFoundError(f'file "{model_path}" not found, please provide a valid path')
         
@@ -80,8 +83,8 @@ def import_model(config, epoch, model_path=None, device=None, n_diags=None, n_dr
         
     model = BERT_PT(BERT(config), n_diags, n_drugs, n_vars)
     model.load_state_dict(torch.load(model_path, map_location=device))
+    print(f'successfully loaded model {model_path}')
     return model.bert
-
 
 # -----------------------------------------------------------------------------------------------------------------
 

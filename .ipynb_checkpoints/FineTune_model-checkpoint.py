@@ -13,12 +13,10 @@ from sklearn.metrics import roc_auc_score
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.model_selection import KFold
 
-from Dare.Datasets import Dataset_FT
-from Dare.utils import ModelConfigs
-from Dare.bert_pretraining import BERT_PT
-from Dare.bert import BERT
-from Dare.utils_FT import WeigthedBCELoss, rnn_liner_FT, import_model, EarlyStopping
-from Dare.trainer import finetuner
+
+from Dare import Dataset_FT, BERT_PT, BERT, finetuner
+from Dare.Model.utils import ModelConfigs
+from Dare.Model.utils_FT import WeigthedBCELoss, rnn_liner_FT, import_model, EarlyStopping
 
 
 # To get weights for class balances
@@ -70,7 +68,7 @@ def main(args, res_path_base):
     if args.only_rnn:
         bert = None
     else:
-        bert = import_model(configs, args.model_epoch)
+        bert = import_model(configs, args.model_epoch, model_path=args.path_model)
         bert.eval()
         for param in bert.parameters():
             param.requires_grad = False
@@ -163,6 +161,7 @@ if __name__=='__main__':
     parser.add_argument('--config_file', type=str, default='Dare/Configs/configs_std.yaml')
     parser.add_argument('--paths_file', type=str, default='Dare/Configs/data_paths.yaml')
     parser.add_argument('--path_results', type=str, default='Results/FT/')
+    parser.add_argument('--path_model', type=str, default='/home/enrico/data_dare_test')
     parser.add_argument('--model_epoch', type=int, default=9)
     parser.add_argument('--hidden_size', type=int, default=360)
     parser.add_argument('--n_layers', type=int, default=3)
@@ -170,14 +169,20 @@ if __name__=='__main__':
     parser.add_argument('--relative', action='store_true')
     parser.add_argument('--no-relative', dest='relative', action='store_false')
     parser.set_defaults(relative=True)
+    parser.add_argument('--save_complete_prediction', action='store_true')
+    parser.set_defaults(save_complete_prediction=False)
     
     args = parser.parse_args()
     RES_PATH = args.path_results
-    #RES_PATH = os.path.join(RES_PATH, f'{"weight_BCE" if args.weighted_loss else "BCE"}/{args.predict}/')
-    RES_PATH = os.path.join(RES_PATH, f'{args.predict}/res_with_labs')
-    if not os.path.exists(RES_PATH): # If it doesn't exist, create it
-        os.mkdir(RES_PATH)
-        print(f"Directory '{RES_PATH}' not found, created new one.")
+    #os.mkdir(RES_PATH, exist_ok=True)
+    RES_PATH = os.path.join(RES_PATH, f'{"weight_BCE" if args.weighted_loss else "BCE"}/')
+    #os.mkdir(RES_PATH, exist_ok=True)
+    RES_PATH = os.path.join(RES_PATH, f'{args.predict}/')
+    #os.mkdir(RES_PATH, exist_ok=True)
+    if args.save_complete_prediction:
+        RES_PATH = os.path.join(RES_PATH, f'{args.predict}/res_with_labs')
+    os.makedirs(RES_PATH, exist_ok=True)
+    print(f"Results directory: '{RES_PATH}'")
     
         
     if args.predict == 'diags':

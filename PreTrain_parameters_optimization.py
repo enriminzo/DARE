@@ -6,6 +6,7 @@ import pickle
 import warnings
 import tqdm
 import os
+import argparse
 
 from ray import tune
 from ray.tune import CLIReporter
@@ -13,10 +14,9 @@ from ray.tune.schedulers import  HyperBandForBOHB, ASHAScheduler
 from ray.tune.search.bohb import  TuneBOHB
 from ray.air import session, RunConfig
 
-from Dare.Datasets import Dataset_PT
-from Dare.trainer import pretrainer
-from Dare.utils import ModelConfigs
-from Dare.bert import BERT
+from Dare import Dataset_PT, pretrainer, BERT
+from Dare.Model.utils import ModelConfigs
+
 
 
 # Define hyperparameters space and initial points (optional)
@@ -36,12 +36,12 @@ def pretrain_model(config_PT, args):
     configs = ModelConfigs(config_PT, configs_path=args.config_file)
     paths = OmegaConf.load(args.paths_file)
     losses_train_path = f"LOSSES{args.experiment_name}_{config_PT['n_layers']}_{config_PT['hidden_size']}_{config_PT['attn_heads']}{'_R' if config_PT['relative'] else ''}.pkl"
-    losses_train_path = os.path.join(res.path_results,, losses_train_path)
+    losses_train_path = os.path.join(args.path_results,losses_train_path)
     with open(paths.idps_tests, 'rb') as f:
         idps_test = pickle.load(f)
     ds = Dataset_PT(paths, configs, idps_to_drop=idps_test)
-    trainer = pretrainer(BERT(configs), ds, .20,  batch_size=batch, log_freq=None, model_path=None, lr=1e-4)
-    for epoch in range(epochs):
+    trainer = pretrainer(BERT(configs), ds, .20,  batch_size=args.batch_size, log_freq=None, model_path=None, lr=1e-4)
+    for epoch in range(args.epochs):
         train_res = trainer.train(epoch, losses_train_path)
         test_res = trainer.test(epoch, losses_train_path)
         #with tune.checkpoint_dir(epoch) as checkpoint_dir: # uncomment this to save all models
@@ -93,7 +93,7 @@ def main(args):
                 progress_reporter=reporter),
         param_space=config_PT
         )
-    if restore:
+    if False: #args.restore:
         path_restore = os.path.join(args.path_results, args.experiment_name)
         tuner = tune.Tuner.restore(path=path_restore, trainable=train_func, param_space=config_PT)
     results = tuner.fit()
@@ -108,11 +108,12 @@ if __name__=='__main__':
     parser.add_argument('--samples', type=int, default=25)
     parser.add_argument('--restore',  action='store_true')
     parser.set_defaults(restore=False)
-    parser.add_argument('--config_file', type=str, default='/home/enrico/transformer_final/Configs/configs_std.yaml')
-    parser.add_argument('--paths_file', type=str, default='/home/enrico/transformer_final/Configs/data_paths.yaml')
-    parser.add_argument('--path_results', type=str, default='Results/PT')
+    parser.add_argument('--config_file', type=str, default='/home/enrico/DARE/Dare/Configs/configs_std.yaml')
+    parser.add_argument('--paths_file', type=str, default='/home/enrico/DARE/Dare/Configs/data_paths.yaml')
+    parser.add_argument('--path_results', type=str, default='/home/enrico/DARE/Results/PT')
     parser.add_argument('--experiment_name', type=str, default='experiment_0')
     
     args = parser.parse_args()
+    os.makedirs(args.path_results, exist_ok=True)
     main(args)
         
