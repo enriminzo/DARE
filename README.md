@@ -1,7 +1,7 @@
 # DARE
 
 Implementation of: 
-"DARE: development and validation of an attention based encoder for the analysis of diabetes routinely collected health-care data"
+"A Deep Attention-Based Encoder for the Prediction of Type 2 Diabetes Longitudinal Outcomes from Routinely Collected Health Care Data"
 
 Dare is a BERT base model that can be easily fine-tuned for various clinical prediction tasks, enabling a personalized approach to the treatment of T2DM and advancing precision medicine for diabetes management. Details of the model can be found in ...
 
