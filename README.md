@@ -3,7 +3,7 @@
 Implementation of: 
 "A Deep Attention-Based Encoder for the Prediction of Type 2 Diabetes Longitudinal Outcomes from Routinely Collected Health Care Data"
 
-Dare is a BERT base model that can be easily fine-tuned for various clinical prediction tasks, enabling a personalized approach to the treatment of T2DM and advancing precision medicine for diabetes management. Details of the model can be found in ...
+Dare is a transformer base encoder that can be easily fine-tuned for various clinical prediction tasks, enabling a personalized approach to the treatment of T2DM and advancing precision medicine for diabetes management. Details of the model can be found in ...
 
 
 ## Get Started
