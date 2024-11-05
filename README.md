@@ -1,9 +1,9 @@
 # DARE
 
 Implementation of: 
-"A Deep Attention-Based Encoder for the Prediction of Type 2 Diabetes Longitudinal Outcomes from Routinely Collected Health Care Data"
+"[A Deep Attention-Based Encoder for the Prediction of Type 2 Diabetes Longitudinal Outcomes from Routinely Collected Health Care Data](https://doi.org/10.1101/2024.11.02.24316561)"
 
-Dare is a transformer base encoder that can be easily fine-tuned for various clinical prediction tasks, enabling a personalized approach to the treatment of T2DM and advancing precision medicine for diabetes management. Details of the model can be found in ...
+Dare is a transformer base encoder that can be easily fine-tuned for various clinical prediction tasks, enabling a personalized approach to the treatment of T2DM and advancing precision medicine for diabetes management. 
 
 
 ## Get Started
@@ -27,4 +27,14 @@ The code in `Pretrain_parameters_optimization.py` can be used to search optimal 
 ## Citation
 If you find this code or our article usefull for your work you can cite it:
 
+@article {Manzini2024,<br/> 
+author = {Manzini, Enrico and Vlacho, Bogdan and Franch-Nadal, Josep and Escudero, Joan and Génova, Ana and Andrés, Eric and Reixach, Elisenda and Pizarro, Israel and Mauricio, Dídac and Perera-LLuna, Alexandre},<br/> 
+title = {A Deep Attention-Based Encoder for the Prediction of Type 2 Diabetes Longitudinal Outcomes from Routinely Collected Health Care Data},<br/> 
+year = {2024},<br/> 
+doi = {10.1101/2024.11.02.24316561},<br/> 
+publisher = {Cold Spring Harbor Laboratory Press},<br/> 
+URL = {https://www.medrxiv.org/content/early/2024/11/04/2024.11.02.24316561},<br/> 
+eprint = {https://www.medrxiv.org/content/early/2024/11/04/2024.11.02.24316561.full.pdf},<br/> 
+journal = {medRxiv}<br/> 
+}
 
